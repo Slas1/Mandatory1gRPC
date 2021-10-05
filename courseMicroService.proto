@@ -1,0 +1,33 @@
+syntax = "proto3";
+package courseMicroService;
+
+option go_package = "Mandatory1gRPC/courseMicroService";
+
+message Course {
+    string ID = 1;
+    string name = 2;
+    int32 ects = 3;
+    int32 courseResponsibleId = 4;
+    int32 nRatings = 5;
+    float avgRatings = 6;
+    string activeStudents = 7;
+}
+
+message getCoursesRequest {string message = 1;}
+message getCoursesResponce {repeated Course course = 1;}
+message postCourseRequest {Course course = 1;}
+message postCourseResponce {string message = 1;}
+message getCourseByIDRequest {string ID = 1;}
+message getCourseByIDResponce {Course course = 1;}
+message deleteCourseByIDRequest{string ID = 1;}
+message deleteCourseByIDResponce{string message = 1;}
+message putCourseByIDRequest{Course course = 1;}
+message putCourseByIDResponse{string message = 1;}
+
+service CourseService {
+    rpc getCourses(getCoursesRequest) returns (getCoursesResponce) {};
+    rpc postCourse (postCourseRequest) returns (postCourseResponce) {};
+    rpc getCourseByID (getCourseByIDRequest) returns (getCourseByIDResponce);
+    rpc deleteCourseByID (deleteCourseByIDRequest) returns (deleteCourseByIDResponce);
+    rpc putCourseByID (putCourseByIDRequest) returns (putCourseByIDResponse);
+}
